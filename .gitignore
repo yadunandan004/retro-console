@@ -1,0 +1,42 @@
+# Build directories
+build/
+cmake-build-*/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Compiled binaries
+chip8_emulator
+*.exe
+*.out
+*.app
+*.dSYM/
+
+# Object files
+*.o
+*.obj
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ROM files (optional - you might want to track some test ROMs)
+# roms/*.ch8
+# roms/*.rom
+
+# Logs and debug files
+*.log
+core
+vgcore.*
