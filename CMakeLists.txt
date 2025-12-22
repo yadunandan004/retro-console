@@ -5,6 +5,14 @@ project(chip8_emulator)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+if(APPLE)
+    if(EXISTS /opt/homebrew)
+        list(APPEND CMAKE_PREFIX_PATH /opt/homebrew)
+    else()
+        list(APPEND CMAKE_PREFIX_PATH /usr/local)
+    endif()
+endif()
+
 # Enable debug symbols for better debugging experience
 set(CMAKE_BUILD_TYPE Debug)
 
@@ -15,10 +23,12 @@ pkg_check_modules(SDL2 REQUIRED sdl2)
 # Add our source files
 set(SOURCES
     src/main.cpp
+        src/chip8.cpp
 )
 
 # Create the executable
-add_executable(chip8_emulator ${SOURCES})
+add_executable(chip8_emulator ${SOURCES}
+        src/chip8.cpp)
 
 
 # Link SDL2 libraries
