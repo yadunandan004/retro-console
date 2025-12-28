@@ -73,6 +73,7 @@ IMPORTANT - I want to LEARN, so please:
 - Implement everything at once
 - Use magic numbers without explaining them
 - Rush through the instruction set
+- Write logic/function implementations on my behalf - explain the concept and let ME write the code. Static data (like lookup tables, constants) is fine, but logic is mine to implement.
 
 TEACHING APPROACH:
 For each opcode group, I want:

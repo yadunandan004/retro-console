@@ -85,14 +85,39 @@ void chip8::cycle() {
     uint16_t fn = (ins >> 12) & 0x0F ;
     switch (fn) {
         case 0x0: // clear display
-            if (ins == 0x00E0) {
-                clearDisplay();
+            switch (ins) {
+                case 0x00E0: {
+                    clearDisplay();
+                    }
+                    break;
+                case 0x00EE: {
+                    sp--;
+                    pc = stack[sp];
+                    pc-=2;
+                }
+                    break;
             }
             break;
         case 0x1: { // jump to address
             uint16_t addr = ins & 0xFFF;
             pc = addr;
             pc-=2;
+        }
+            break;
+        case 0x3: {
+            int reg = (ins>>8) & 0x0F;
+            uint8_t v = ins & 0x0FF;
+            if (gen_register[reg] == v) {
+                pc+=2;
+            }
+        }
+            break;
+        case 0x4: {
+            int reg = (ins>>8) & 0x0F;
+            uint8_t v = ins & 0x0FF;
+            if (gen_register[reg] != v) {
+                pc+=2;
+            }
         }
             break;
         case 0x6: // set operation
@@ -136,6 +161,16 @@ void chip8::cycle() {
             }
         }
         break;
+        case 0x2: { // call
+            uint16_t addr = ins & 0xFFF;
+            stack[sp] = pc +2;
+            sp++;
+            pc = addr;
+            pc -=2;
+        }
+        break;
+        default:
+           std::cout<<"un-identified instruction"<< ins<<std::endl;
     }
     pc+=2;
 }
